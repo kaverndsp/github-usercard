@@ -38,7 +38,14 @@ axios
           Using that array, iterate over it, requesting data for each user, creating a new card for each
           user, and adding that card to the DOM.
 */
-
+axios
+.get('https://api.github.com/users/kaverndsp/followers')
+.then(response => {
+  response.data.forEach(item => {
+    const followerCard = drawCard(item);
+    newCard.append(followerCard);
+  })
+})
 // const followersArray = [];
 
 /* Step 3: Create a function that accepts a single object as its only argument,
@@ -103,8 +110,8 @@ function drawCard(github){
   newUsername.textContent = github.login;
   newLocation.textContent = github.location;
   newAddress.textContent = github.url;
-  newFollower.textContent = github.followers;
-  newFollowing.textContent = github.following;
+  newFollower.textContent = `Followers: ${github.followers}`;
+  newFollowing.textContent = `Following: ${github.following}`;
   newBio.textContent = github.bio;
 
 
